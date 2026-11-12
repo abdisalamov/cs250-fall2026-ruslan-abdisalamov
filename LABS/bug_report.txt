@@ -1,0 +1,44 @@
+STEP 4 - BUG REPORT
+===================
+Student name: Ruslan
+
+BUG 1
+  Function: total_treats
+  Line number: 29
+  What was wrong: It used = instead of +=, so total got replaced every
+                  loop instead of adding up. It only kept the last pet's
+                  treats (6).
+  My fix: Changed  total = treats_per_pet[name]  to  total += treats_per_pet[name]
+  How I found it: I put a breakpoint inside the loop and watched total.
+                  It went 2, 5, 1, 6 instead of 2, 7, 8, 14. It never
+                  got bigger, it just changed to each new value.
+
+
+BUG 2
+  Function: average_age
+  Line number: 36
+  What was wrong: The range started at 1, so it skipped ages[0] (the
+                  first age, 3). The total was 41 instead of 44, so the
+                  average was 5.125 instead of 5.5.
+  My fix: Changed  range(1, len(ages))  to  range(len(ages))
+  How I found it: I watched i and total. On the first step i was already
+                  1, not 0, so the first age was never added.
+
+
+BUG 3
+  Function: find_oldest
+  Line number: 49
+  What was wrong: It used < instead of >, so it was looking for a
+                  younger pet. Since oldest_age started at 0 and no age
+                  is less than 0, the if was never true. It returned an
+                  empty name and age 0.
+  My fix: Changed  if age < oldest_age:  to  if age > oldest_age:
+  How I found it: I stepped through the loop and watched oldest_name and
+                  oldest_age. They stayed "" and 0 the whole time, even
+                  when age was 12.
+
+
+REFLECTION (1-2 sentences)
+  The debugger showed me the values changing step by step, so I could
+  see exactly where they went wrong. Just reading the code, the bugs
+  were easy to miss because they were only one character or one number off.
